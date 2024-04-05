@@ -1,6 +1,6 @@
 // chp4ex0.cpp
-// ì¤‘ê°„ê³ ì‚¬, ê¸°ë§ê³ ì‚¬, ê·¸ë¦¬ê³  ê³¼ì œ ì ìˆ˜ ëª‡ê°œë¥¼ ë°›ê³ 
-// ë§ˆì§€ë§‰ í‰ê·  ê²°ê³¼ ì ìˆ˜ë¥¼ ê³„ì‚°í•˜ê¸°.
+// Áß°£°í»ç, ±â¸»°í»ç, ±×¸®°í °úÁ¦ Á¡¼ö ¸î°³¸¦ ¹Ş°í
+// ¸¶Áö¸· Æò±Õ °á°ú Á¡¼ö¸¦ °è»êÇÏ±â.
 #include <algorithm>
 #include <ios>
 #include <iomanip>
@@ -9,48 +9,43 @@
 #include <string>
 #include <vector>
 #include "grade.h"
-#include "student.h"
 #include "median.h"
 #include "Student_info.h"
-using namespace std;
 
-// ì¤‘ê°„ì‹œí—˜ ì ìˆ˜, ê¸°ë§ì‹œí—˜ ì ìˆ˜, ì¢…í•© ê³¼ì œ ì ìˆ˜ì—ì„œ
-// í•™ìƒì˜ ì¢…í•© ì ìˆ˜ë¥¼ ê°€í•¨
-
-
-// vector<double>ì˜ ì¤‘ì•™ê°’ì„ êµ¬í•¨.
-// í•¨ìˆ˜ë¥¼ í˜¸ì¶œí•˜ë©´ ì¸ìˆ˜ë¡œ ì œê³µëœ ë°±í„°ë¥¼ í†µì§¸ë¡œ ë³µì‚¬
 
 
 
 int main() {
     vector<Student_info> students;
     Student_info record;
-    string::size_type maxlen = 0; //ì´ˆê¸°ìƒíƒœ
-    
-    //í•™ìƒ ì´ë¦„ê³¼ ëª¨ë“  ì ìˆ˜ë¥¼ ì½ì–´ ì €ì¥í•˜ê³ 
-    //ê°€ì¥ ê¸´ ì´ë¦„ì„ ì°¾ìŒ.
+    string::size_type maxlen = 0; //ÃÊ±â»óÅÂ
+
+    //ÇĞ»ı ÀÌ¸§°ú ¸ğµç Á¡¼ö¸¦ ÀĞ¾î ÀúÀåÇÏ°í
+    //°¡Àå ±ä ÀÌ¸§À» Ã£À½.
+ 
     while (read(cin, record)) {
         maxlen = max(maxlen, record.name.size());
-        
+
         students.push_back(record);
     }
+   
     
 
-    //í•™ìƒ ì •ë³´ë¥¼ ì•ŒíŒŒë²³ ìˆœìœ¼ë¡œ ì •ë ¬
+
+    //ÇĞ»ı Á¤º¸¸¦ ¾ËÆÄºª ¼øÀ¸·Î Á¤·Ä
     sort(students.begin(), students.end(), compare);
 
-   
+
     for (vector<Student_info>::size_type i = 0; i != students.size(); ++i) {
-        //ì´ë¦„ê³¼ ì˜¤ë¥¸ìª½ ê³µë°±ì„ í¬í•¨í•˜ì—¬ maxlen + 1 ê°œì˜ ë¬¸ìë¥¼ ì¶œë ¥
+        //ÀÌ¸§°ú ¿À¸¥ÂÊ °ø¹éÀ» Æ÷ÇÔÇÏ¿© maxlen + 1 °³ÀÇ ¹®ÀÚ¸¦ Ãâ·Â
         cout << students[i].name << string(maxlen + 1 - students[i].name.size(), ' ');
 
 
-        // ì¢…í•© ì ìˆ˜ë¥¼ ê³„ì‚°í•´ ìƒì„±
+        // Á¾ÇÕ Á¡¼ö¸¦ °è»êÇØ »ı¼º
         try {
             double final_grade = grade(students[i]);
-            // ê²°ê³¼ë¥¼ ì¶œë ¥
-            streamsize prec = cout.precision(); // ì§€ê¸ˆ cout precision
+            // °á°ú¸¦ Ãâ·Â
+            streamsize prec = cout.precision(); // Áö±İ cout precision
             cout << "Final grade: " << setprecision(3)
                 << final_grade << setprecision(prec) << endl;
         }
@@ -60,5 +55,5 @@ int main() {
         }
     }
 
-     return 0;
-} // main ë
+    return 0;
+} // main ³¡
